@@ -1,0 +1,81 @@
+h2 {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    text-align: left;
+    width: 251px;
+    height: 37px;
+    margin-top: 10px;
+    padding-left: 12px;
+}
+
+.expense-tracker-top{
+    width: 76rem;
+    height: 16rem;
+    background-color: #626262;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.wallet-balance, .expenses{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 20rem;
+    height: 10rem;
+    background-color: #9B9B9B;
+    border-radius: 15px;
+    margin-left: 40px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.wallet-balance div{
+    font-family:  "Ubuntu";
+    font-size: 1.5rem;
+    color: #9DFF5B;
+}
+
+.wallet-balance-text{
+    color: #FFFFFF;
+}
+
+.wallet-balance button{
+    font-family: "Ubuntu";
+    background: linear-gradient(to right, #B5DC52, #89E148);
+    color: #FFFFFF;
+    font-weight: 500;
+    width: 8rem;
+    height: 2rem;
+    border-radius: 12px;
+}
+
+.expenses div{
+    font-family:  "Ubuntu";
+    font-size: 1.5rem;
+    color: #F4BB4A;
+}
+
+.expenses-text{
+    color: #FFFFFF;
+}
+
+.expenses button{
+    font-family: "Ubuntu";
+    background: linear-gradient(to right, #FF9595, #FF4747,#FF3838);
+    color: #FFFFFF;
+    font-weight: 500;
+    width: 8rem;
+    height: 2rem;
+    border-radius: 12px;
+}
+
+.piechart-and-label {
+    display: flex;
+    justify-content: center;
+    padding-left: 120px;
+}
