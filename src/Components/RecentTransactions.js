@@ -38,12 +38,14 @@ const RecentTransactions  = () => {
 
     return ( <div>
         <h2>Recent Transactions</h2>
-        <div className="transaction-list">
-            {transactionList.filter((item) => item.id>(pageNum-1)*3 && item.id<=(pageNum)*3)
-            .map((item) => <TransactionItem item={item} handleCtgImg={handleCtgImg}/>)}
+        <div className='recent-transactions'>
+            <div className="transaction-list">
+                {transactionList.filter((item) => item.id>(pageNum-1)*3 && item.id<=(pageNum)*3)
+                .map((item) => <TransactionItem item={item} handleCtgImg={handleCtgImg}/>)}
+            </div>
             <Navigation pageNum={pageNum} 
-            handleDecrement={handleDecrement} 
-            handleIncrement={handleIncrement}
+                handleDecrement={handleDecrement} 
+                handleIncrement={handleIncrement}
             />
         </div>
     </div> );
