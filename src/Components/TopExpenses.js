@@ -11,8 +11,6 @@ const TopExpenses = () => {
 
     const transactionTotal = transactionList.reduce((total,transaction) => total+transaction.price,0)
 
-   
-
     const handleCategoryBar = (category) => {
         if(category==='Entertainment'){
             return entertainmentTotal;
@@ -33,7 +31,8 @@ const TopExpenses = () => {
             </div>
             <div className="top-expense-chart">
                 {data.map((item) =>
-                    <div style={{width: `${(handleCategoryBar(item.label)/transactionTotal)*20}rem`,
+                    <div 
+                    style={{width: `${(handleCategoryBar(item.label)/transactionTotal)*20}rem`,
                     height:'2rem',
                     backgroundColor:'#8784D2',
                     borderRadius:'0 .8rem .8rem 0'

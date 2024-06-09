@@ -1,14 +1,12 @@
 import RecentTransactions from "./RecentTransactions";
 import TopExpenses from "./TopExpenses";
 
-const ExpenseTrackerBottom = () => {
-    
 
+const ExpenseTrackerBottom = () => {
     return ( <div className="expense-tracker-bottom">
         <RecentTransactions />
         <TopExpenses />
-    </div>
-     );
+    </div>);
 }
  
 export default ExpenseTrackerBottom;

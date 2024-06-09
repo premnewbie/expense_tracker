@@ -2,27 +2,17 @@ import './ExpenseDashboard.css';
 import PieChartWithCustomizedLabel from './PieChartWithCustomizedLabel';
 import { useContext } from 'react';
 import { Context } from "./ExpenseDashboard";
+import WalletBalnce from './WalletBalance';
+import Expenses from './Expenses';
 
 const ExpenseTrackerTop = () => {
-    const {data,transactionList} = useContext(Context);
+    const {data} = useContext(Context);
     
     return ( <div className='expense-tracker-top'>
         <h2>Expense Tracker</h2>
         <div className='expense-tracker-top-section'>
-            <div className='wallet-balance'>
-                <div>
-                    <span className='wallet-balance-text'>Wallet Balance: </span>
-                    <span className='balance'>₹4500</span>
-                </div>
-                <button>+ Add Income</button>
-            </div>
-            <div className='expenses'>
-                <div>
-                    <span className='expenses-text'>Expenses: </span>
-                    <span className='expense'>₹500</span>
-                </div>
-                <button>+ Add Expense</button>
-            </div>
+            <WalletBalnce />
+            <Expenses />
             <div className='piechart-and-labels'>
                 <PieChartWithCustomizedLabel data={data}/>
                 <div className='labels'>

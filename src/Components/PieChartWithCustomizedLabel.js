@@ -32,6 +32,7 @@ export default function PieChartWithCustomizedLabel({data}) {
           [`& .${pieArcLabelClasses.root}`]: {
             fill: 'white',
             fontSize: 14,
+            fontWeight: 500
           },
         }}
         {...sizing}
