@@ -4,12 +4,13 @@ import ExpenseTrackerTop from './ExpenseTrackerTop';
 export const Context = createContext();
 
 const ExpenseDashboard = () => {
-    const [change,setChange] = useState();
-    let wallet = JSON.parse(localStorage.getItem('wallet'));;
+    const [change,setChange] = useState(false);
+    const [wallet,setWallet] = useState(JSON.parse(localStorage.getItem('wallet')));
     const[transactionList,setTransactionList] = useState(JSON.parse(localStorage.getItem('transactionList')));
 
     useEffect(()=> {
         setTransactionList(JSON.parse(localStorage.getItem('transactionList')));
+        setWallet(JSON.parse(localStorage.getItem('wallet')))
     },[change])
 
     const transactionTotal = transactionList.reduce((total,transaction) => total+transaction.price,0)

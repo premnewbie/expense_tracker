@@ -16,7 +16,7 @@ const WalletBalnce = () => {
                     <span className='balance'>₹{wallet}</span>
                 </div>
                 <button onClick={handleOpen}>+ Add Income</button>
-                <AddIncome open={open} handleOpen={handleOpen} handleClose={handleClose} wallet={wallet} />
+                <AddIncome open={open} handleOpen={handleOpen} handleClose={handleClose} />
         </div> );
 }
  

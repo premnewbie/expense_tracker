@@ -1,6 +1,9 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import { useContext } from 'react';
+import { Context } from "./ExpenseDashboard";
+import { useSnackbar } from 'notistack';
 
 const style = {
   position: 'absolute',
@@ -14,15 +17,21 @@ const style = {
   p: 4,
 };
 
-export default function AddIncome({open,handleClose,wallet}) {
-
+export default function AddIncome({open,handleClose}) {
+  let {change,setChange,wallet} = useContext(Context);
   const [income,setIncome] = React.useState(0);
 
+  const { enqueueSnackbar } = useSnackbar();
   const handleIncome = () => {
-    wallet=wallet+Number(income);
-    localStorage.setItem('wallet',JSON.stringify(wallet))
-    wallet = localStorage.getItem('wallet');
-    handleClose();
+    if(!income){
+      enqueueSnackbar('Please enter a valid amount',{variant: 'warning',autoHideDuration:3000})
+    } else{
+      handleClose();
+      wallet=wallet+Number(income);
+      setIncome(null);
+      localStorage.setItem('wallet',JSON.stringify(wallet))
+      setChange(!change);
+    }
   }
  
   return (

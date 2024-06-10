@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { useState,useContext } from 'react';
 import { Context } from "./ExpenseDashboard";
+import { useSnackbar } from "notistack";
 
 const style = {
   position: 'absolute',
@@ -17,8 +18,9 @@ const style = {
 };
 
 export default function AddExpense({open,handleClose}) {
-    let {transactionList,change,setChange} = useContext(Context);
+    let {transactionList,change,setChange,wallet} = useContext(Context);
 
+    const { enqueueSnackbar } = useSnackbar();
     let newId;
     const [transaction,setTransaction] = useState();
     const [category,setCategory] = useState();
@@ -45,11 +47,30 @@ export default function AddExpense({open,handleClose}) {
         setDate(unSplitDate);
     }
 
+    const handleCheck = () => {
+        if(!transaction){
+            enqueueSnackbar('Please Enter a Title for the transaction',{variant: 'warning'});
+        } else if(!price){
+            enqueueSnackbar('Please Enter the price',{variant: 'warning'});
+        } else if(!category){
+            enqueueSnackbar('Please select a category',{variant: 'warning'});
+        } else if(!date){
+            enqueueSnackbar('Please select a date',{variant: 'warning'});
+        } else {
+            handleAddTransaction();
+        }
+    }
+
     const handleAddTransaction = () => {
         handleIdNum();
         const item = {'id': newId,'price':price,'transaction':transaction,'category':category,'date':date}
+        setPrice(null);
+        setTransaction(null);
+        setCategory(null);
+        setDate(null);
         transactionList.push(item);
         localStorage.setItem('transactionList',JSON.stringify(transactionList))
+        localStorage.setItem('wallet',JSON.stringify(wallet-price))
         setChange(!change);
         handleClose();
     }
@@ -75,7 +96,7 @@ export default function AddExpense({open,handleClose}) {
                     </select>
                     <input type='date' onInput={(e)=>handleDate(e.target.value)}/>
                 </div>
-                <button className='add-expense-btn' onClick={handleAddTransaction}>Add Expense</button>
+                <button className='add-expense-btn' onClick={handleCheck}>Add Expense</button>
                 <button className='cancel-expense-btn' onClick={handleClose}>Cancel</button>
             </Box>
             </Modal>

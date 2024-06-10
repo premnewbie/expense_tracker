@@ -5,17 +5,20 @@ import { useState, useContext } from 'react';
 import { Context } from './ExpenseDashboard';
 
 const TransactionItem = ({item,handleCtgImg}) => {
-    
+
+    const prevPrice = item.price;
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    let {transactionList,change,setChange} = useContext(Context);
+    let {transactionList,change,setChange,wallet} = useContext(Context);
 
     const handleDelete = () => {
+        wallet += prevPrice;
         const newList = transactionList.filter((transaction) => transaction.id!==item.id);
         localStorage.setItem('transactionList',JSON.stringify(newList))
-        setChange(!change); 
+        localStorage.setItem('wallet',JSON.stringify(wallet))
+        setChange(!change);
     }
 
     return (

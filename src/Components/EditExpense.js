@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { useState,useContext } from 'react';
 import { Context } from "./ExpenseDashboard";
+import { useSnackbar } from "notistack";
 
 const style = {
   position: 'absolute',
@@ -17,8 +18,10 @@ const style = {
 };
 
 export default function EditExpense({open,handleClose,item}) {
-  let {transactionList,change,setChange} = useContext(Context);
+  let {transactionList,change,setChange,wallet} = useContext(Context);
 
+  const { enqueueSnackbar } = useSnackbar();
+  const prevPrice = item.price;
   const [transaction,setTransaction] = useState();
   const [category,setCategory] = useState();
   const [date,setDate] = useState();
@@ -33,14 +36,30 @@ export default function EditExpense({open,handleClose,item}) {
       setDate(unSplitDate);
   }
 
+  const handleCheck = () => {
+    if(!transaction){
+        enqueueSnackbar('Please Enter a Title for the transaction',{variant: 'warning'});
+    } else if(!price){
+        enqueueSnackbar('Please Enter the price',{variant: 'warning'});
+    } else if(!category){
+        enqueueSnackbar('Please select a category',{variant: 'warning'});
+    } else if(!date){
+        enqueueSnackbar('Please select a date',{variant: 'warning'});
+    } else {
+        handleEditTransaction();
+    }
+}
+
   const handleEditTransaction = () => {
+    handleClose();
+    wallet += prevPrice - price;
     item.date = date;
     item.transaction = transaction;
     item.category = category;
     item.price = price;
     localStorage.setItem('transactionList',JSON.stringify(transactionList))
+    localStorage.setItem('wallet',JSON.stringify(wallet))
     setChange(!change);
-    handleClose();
   }
   
  
@@ -65,7 +84,7 @@ export default function EditExpense({open,handleClose,item}) {
                 </select>
                 <input type='date' onInput={(e)=>handleDate(e.target.value)}/>
             </div>
-            <button className='edit-expense-btn' onClick={handleEditTransaction}>Edit Expense</button>
+            <button className='edit-expense-btn' onClick={handleCheck}>Edit Expense</button>
             <button className='cancel-edit-expense-btn' onClick={handleClose}>Cancel</button>
         </Box>
       </Modal>
