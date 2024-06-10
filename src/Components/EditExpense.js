@@ -38,13 +38,13 @@ export default function EditExpense({open,handleClose,item}) {
 
   const handleCheck = () => {
     if(!transaction){
-        enqueueSnackbar('Please Enter a Title for the transaction',{variant: 'warning'});
+        enqueueSnackbar('Please Enter a Title for the transaction',{variant: 'warning',autoHideDuration:2000});
     } else if(!price){
-        enqueueSnackbar('Please Enter the price',{variant: 'warning'});
+        enqueueSnackbar('Please Enter the price',{variant: 'warning',autoHideDuration:2000});
     } else if(!category){
-        enqueueSnackbar('Please select a category',{variant: 'warning'});
+        enqueueSnackbar('Please select a category',{variant: 'warning',autoHideDuration:2000});
     } else if(!date){
-        enqueueSnackbar('Please select a date',{variant: 'warning'});
+        enqueueSnackbar('Please select a date',{variant: 'warning',autoHideDuration:2000});
     } else {
         handleEditTransaction();
     }

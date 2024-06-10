@@ -24,7 +24,7 @@ export default function AddIncome({open,handleClose}) {
   const { enqueueSnackbar } = useSnackbar();
   const handleIncome = () => {
     if(!income){
-      enqueueSnackbar('Please enter a valid amount',{variant: 'warning',autoHideDuration:3000})
+      enqueueSnackbar('Please enter a valid amount',{variant: 'warning',autoHideDuration:2000})
     } else{
       handleClose();
       wallet=wallet+Number(income);
