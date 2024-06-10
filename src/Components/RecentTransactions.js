@@ -3,14 +3,16 @@ import Travel from '../Assets/Travel.png';
 import Entertainment from '../Assets/Entertainment.png';
 import { useState, useContext } from 'react';
 import { Context } from './ExpenseDashboard';
-import TransactionItem from './TransactionList';
+import TransactionItem from './TransactionItem';
 import Navigation from './Navigation';
 
 
 const RecentTransactions  = () => {
 
     const [pageNum, setPageNum] = useState(1);
-
+    const firstIndex = pageNum*3-3;
+    const lastIndex = pageNum*3;
+ 
     const {transactionList} = useContext(Context);
     
     const handleCtgImg = (category) => {
@@ -21,8 +23,8 @@ const RecentTransactions  = () => {
         } else {
             return Travel;
         }
-    }
-
+    } 
+    
     const handleIncrement = () => {
         if(Math.ceil(transactionList.length/3) >= ((pageNum+1))){
             setPageNum(prev => prev+1);
@@ -40,8 +42,8 @@ const RecentTransactions  = () => {
         <h2>Recent Transactions</h2>
         <div className='recent-transactions'>
             <div className="transaction-list">
-                {transactionList.filter((item) => item.id>(pageNum-1)*3 && item.id<=(pageNum)*3)
-                .map((item) => <TransactionItem item={item} handleCtgImg={handleCtgImg}/>)}
+                {transactionList.slice(firstIndex,lastIndex)
+                .map((item) => <TransactionItem item={item} handleCtgImg={handleCtgImg} />)}
             </div>
             <Navigation pageNum={pageNum} 
                 handleDecrement={handleDecrement} 

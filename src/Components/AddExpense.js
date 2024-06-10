@@ -17,12 +17,23 @@ const style = {
 };
 
 export default function AddExpense({open,handleClose}) {
-    const {transactionList} = useContext(Context);
+    let {transactionList,change,setChange} = useContext(Context);
 
+    let newId;
     const [transaction,setTransaction] = useState();
     const [category,setCategory] = useState();
     const [date,setDate] = useState();
     const [price,setPrice] = useState();
+
+    const handleIdNum = () =>{
+        console.log(transactionList.length)
+        if(transactionList.length===0){
+            newId=1;
+            return;            
+        }
+        newId=(transactionList[transactionList.length-1].id)+1;
+        return;
+    }
 
 
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -35,10 +46,11 @@ export default function AddExpense({open,handleClose}) {
     }
 
     const handleAddTransaction = () => {
-        const item = {id:transactionList.length+1,price:price,transaction:transaction,category:category,date:date}
+        handleIdNum();
+        const item = {'id': newId,'price':price,'transaction':transaction,'category':category,'date':date}
         transactionList.push(item);
-        console.log(transactionList);
         localStorage.setItem('transactionList',JSON.stringify(transactionList))
+        setChange(!change);
         handleClose();
     }
     
@@ -61,7 +73,7 @@ export default function AddExpense({open,handleClose}) {
                         <option value="Food">Food</option>
                         <option value="Travel">Travel</option>
                     </select>
-                    <input type='date'onInput={(e)=>handleDate(e.target.value)}/>
+                    <input type='date' onInput={(e)=>handleDate(e.target.value)}/>
                 </div>
                 <button className='add-expense-btn' onClick={handleAddTransaction}>Add Expense</button>
                 <button className='cancel-expense-btn' onClick={handleClose}>Cancel</button>

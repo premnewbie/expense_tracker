@@ -2,26 +2,24 @@ import { useContext } from 'react';
 import { Context } from "./ExpenseDashboard";
 
 const TopExpenses = () => {
+
     const {data,
-        transactionList,
-        entertainmentTotal,
-        foodTotal,
-        travelTotal
+        entertainmentPercent,
+        foodPercent,
+        travelPercent
     } = useContext(Context);
 
-    const transactionTotal = transactionList.reduce((total,transaction) => total+transaction.price,0)
-
-    const handleCategoryBar = (category) => {
-        if(category==='Entertainment'){
-            return entertainmentTotal;
-        } else if(category==='Food'){
-            return foodTotal;
-        } else if(category==='Travel'){
-            return travelTotal;
+    const handleCategoryBar = (item) => {
+        if(item.label==='Entertainment'){
+            return entertainmentPercent*20;
+        } else if(item.label==='Food'){
+            return foodPercent*20;
+        } else if(item.label==='Travel'){
+            return travelPercent*20;
         }
     }
 
-    return ( <div>
+    return (<div>
         <h2>Top Expenses</h2>
         <div className="top-expense">
             <div className='top-expense-labels'>
@@ -31,13 +29,14 @@ const TopExpenses = () => {
             </div>
             <div className="top-expense-chart">
                 {data.map((item) =>
-                    <div 
-                    style={{width: `${(handleCategoryBar(item.label)/transactionTotal)*20}rem`,
+                <div 
+                    style={{
+                    width: `${handleCategoryBar(item)}rem`,
                     height:'2rem',
                     backgroundColor:'#8784D2',
                     borderRadius:'0 .8rem .8rem 0'
                     }}>
-                    </div>)}
+                </div>)}
             </div>
         </div>
     </div> );

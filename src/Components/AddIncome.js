@@ -21,6 +21,7 @@ export default function AddIncome({open,handleClose,wallet}) {
   const handleIncome = () => {
     wallet=wallet+Number(income);
     localStorage.setItem('wallet',JSON.stringify(wallet))
+    wallet = localStorage.getItem('wallet');
     handleClose();
   }
  

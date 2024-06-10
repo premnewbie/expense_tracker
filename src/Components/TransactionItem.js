@@ -1,13 +1,22 @@
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import TransactionDeleteIcon from '../Assets/TransactionDeleteIcon.png';
 import EditExpense from './EditExpense';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { Context } from './ExpenseDashboard';
 
 const TransactionItem = ({item,handleCtgImg}) => {
     
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    let {transactionList,change,setChange} = useContext(Context);
+
+    const handleDelete = () => {
+        const newList = transactionList.filter((transaction) => transaction.id!==item.id);
+        localStorage.setItem('transactionList',JSON.stringify(newList))
+        setChange(!change); 
+    }
 
     return (
         <div>
@@ -22,14 +31,14 @@ const TransactionItem = ({item,handleCtgImg}) => {
             <div className='transaction-right'>
                 <p className='price'>₹{item.price}</p>
                 <div className='edit-delete-btns'>
-                    <img src={TransactionDeleteIcon} alt='' />
+                    <img src={TransactionDeleteIcon} alt='TransactionDeleteButton' onClick={handleDelete}/>
                     <div className='transaction-edit' onClick={handleOpen}>
                         <EditOutlinedIcon  sx={{ color: 'white',width: '2rem',height:'2rem'}} />
                     </div>
                 </div>
             </div>
         </div>
-        <EditExpense open={open} handleOpen={handleOpen} handleClose={handleClose} item={item}/>
+        <EditExpense open={open} handleOpen={handleOpen} handleClose={handleClose} item={item} />
     </div>
     )
 }
