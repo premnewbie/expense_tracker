@@ -6,7 +6,8 @@ export const Context = createContext();
 const ExpenseDashboard = () => {
     const [change,setChange] = useState(false);
     const [wallet,setWallet] = useState(5000);
-    const[transactionList,setTransactionList] = useState(JSON.parse(localStorage.getItem('transactionList')));
+    const[transactionList,setTransactionList] = useState(JSON.parse(localStorage.getItem('transactionList'))||[]);
+    
     const [transactionTotal,setTransactionTotal] = useState()
     const [entertainmentTotal,setEntertainmentTotal] = useState();
     const [foodTotal,setFoodTotal] = useState();
@@ -14,7 +15,7 @@ const ExpenseDashboard = () => {
 
 
     useEffect(()=> {        
-        setTransactionList(JSON.parse(localStorage.getItem('transactionList')));
+        setTransactionList(JSON.parse(localStorage.getItem('transactionList'))||[]);
         setWallet(JSON.parse(localStorage.getItem('wallet')))
         
         if(transactionList){
