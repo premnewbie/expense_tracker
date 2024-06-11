@@ -16,11 +16,11 @@ const ExpenseTrackerTop = () => {
             <div className='piechart-and-labels'>
                 <PieChartWithCustomizedLabel data={data}/>
                 <div className='labels'>
-                    {data.map(item => (<div key={item.label}>
-                    <span className='color-indicator' 
+                    {data.map(item => (<>
+                    <span key={item.label} className='color-indicator' 
                     style={{backgroundColor: `${item.color}`,width:20,height:10}}></span>
                     <p>{item.label}</p>
-                    </div>))}
+                    </>))}
                 </div>
             </div>
         </div>
