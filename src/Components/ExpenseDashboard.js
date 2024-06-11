@@ -5,6 +5,7 @@ export const Context = createContext();
 
 const ExpenseDashboard = () => {
     const [change,setChange] = useState(false);
+    const [firstRender,setFirstRender] = useState(true);
     const [wallet,setWallet] = useState(JSON.parse(localStorage.getItem('wallet')));
     const[transactionList,setTransactionList] = useState(JSON.parse(localStorage.getItem('transactionList')));
     const [transactionTotal,setTransactionTotal] = useState()
@@ -13,19 +14,22 @@ const ExpenseDashboard = () => {
     const [travelTotal,setTravelTotal] =  useState();
 
     useEffect(()=> {
-        setTransactionList(JSON.parse(localStorage.getItem('transactionList')));
-        setWallet(JSON.parse(localStorage.getItem('wallet')))
-        
-        setTransactionTotal(transactionList.reduce((total,transaction) => total+transaction.price,0));
-        setEntertainmentTotal(transactionList.filter((transaction) => 
-        (transaction.category==='Entertainment'))
-        .reduce((total,transaction) => total+transaction.price,0))
-        setFoodTotal(transactionList.filter((transaction) => 
-        (transaction.category==='Food'))
-        .reduce((total,transaction) => total+transaction.price,0))
-        setTravelTotal(transactionList.filter((transaction) => 
-        (transaction.category==='Travel'))
-        .reduce((total,transaction) => total+transaction.price,0))
+        if(firstRender){
+            setTransactionList(JSON.parse(localStorage.getItem('transactionList')));
+            setWallet(JSON.parse(localStorage.getItem('wallet')))
+            setTransactionTotal(transactionList.reduce((total,transaction) => total+transaction.price,0));
+            setEntertainmentTotal(transactionList.filter((transaction) => 
+            (transaction.category==='Entertainment'))
+            .reduce((total,transaction) => total+transaction.price,0))
+            setFoodTotal(transactionList.filter((transaction) => 
+            (transaction.category==='Food'))
+            .reduce((total,transaction) => total+transaction.price,0))
+            setTravelTotal(transactionList.filter((transaction) => 
+            (transaction.category==='Travel'))
+            .reduce((total,transaction) => total+transaction.price,0))
+
+            setFirstRender(false);
+        }   
     },[change])
 
     useEffect(()=>{
