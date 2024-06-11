@@ -50,6 +50,7 @@ export default function AddExpense({open,handleClose}) {
     const handleCheck = () => {
         if(!transaction){
             enqueueSnackbar('Please Enter a Title for the transaction',{variant: 'warning',autoHideDuration:2000});
+            // alert("Transaction is not there");
         } else if(!price){
             enqueueSnackbar('Please Enter the price',{variant: 'warning',autoHideDuration:2000});
         } else if(!category){
@@ -96,7 +97,7 @@ export default function AddExpense({open,handleClose}) {
                     </select>
                     <input type='date' onInput={(e)=>handleDate(e.target.value)}/>
                 </div>
-                <button className='add-expense-btn' onClick={handleCheck}>Add Expense</button>
+                <button className='add-expense-btn' onClick={()=> handleCheck()}>Add Expense</button>
                 <button className='cancel-expense-btn' onClick={handleClose}>Cancel</button>
             </Box>
             </Modal>
