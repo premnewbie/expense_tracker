@@ -45,7 +45,7 @@ const ExpenseDashboard = () => {
     return ( 
         <Context.Provider value={{data,transactionList,
         entertainmentPercent,foodPercent,travelPercent,
-        wallet,change,setChange}}>
+        transactionTotal,wallet,change,setChange}}>
             <div>
                 <ExpenseTrackerTop />
                 <ExpenseTrackerBottom />

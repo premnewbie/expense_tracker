@@ -4,9 +4,7 @@ import { useContext } from 'react';
 import { Context } from "./ExpenseDashboard";
 
 const Expenses = () => {
-    const {transactionList} = useContext(Context);
-    
-    const transactionTotal = transactionList.reduce((total,transaction) => total+transaction.price,0)
+    const {transactionTotal} = useContext(Context);
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
