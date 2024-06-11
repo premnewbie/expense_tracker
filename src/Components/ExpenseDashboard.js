@@ -5,7 +5,6 @@ export const Context = createContext();
 
 const ExpenseDashboard = () => {
     const [change,setChange] = useState(false);
-    const [firstRender,setFirstRender] = useState();
     const [wallet,setWallet] = useState(JSON.parse(localStorage.getItem('wallet')));
     const[transactionList,setTransactionList] = useState(JSON.parse(localStorage.getItem('transactionList')));
     const [transactionTotal,setTransactionTotal] = useState()
@@ -23,9 +22,7 @@ const ExpenseDashboard = () => {
                 {"id":3,"price":120,"transaction":"Auto","category":"Travel","date":"July 05, 2024"}
             ])
         }
-        // if(!wallet){
-        //     setWallet(5000);
-        // }
+
         if(transactionList){
             setTransactionTotal(transactionList.reduce((total,transaction) => total+transaction.price,0));
             setEntertainmentTotal(transactionList.filter((transaction) => 

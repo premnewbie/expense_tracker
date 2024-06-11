@@ -29,7 +29,7 @@ const TopExpenses = () => {
             </div>
             <div className="top-expense-chart">
                 {data.map((item) =>
-                <div 
+                <div key={item.label}
                     style={{
                     width: `${handleCategoryBar(item)}rem`,
                     height:'2rem',

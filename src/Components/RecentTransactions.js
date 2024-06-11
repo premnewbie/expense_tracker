@@ -10,8 +10,9 @@ import Navigation from './Navigation';
 const RecentTransactions  = () => {
 
     const [pageNum, setPageNum] = useState(1);
-    const firstIndex = pageNum*3-3;
-    const lastIndex = pageNum*3;
+    const recordPerPage = 3;
+    const firstIndex = pageNum*recordPerPage-recordPerPage;
+    const lastIndex = pageNum*recordPerPage;
  
     const {transactionList} = useContext(Context);
     
@@ -43,12 +44,12 @@ const RecentTransactions  = () => {
         <div className='recent-transactions'>
             <div className="transaction-list">
                 {transactionList.slice(firstIndex,lastIndex)
-                .map((item) => <TransactionItem item={item} handleCtgImg={handleCtgImg} />)}
+                .map((item) => <TransactionItem item={item} handleCtgImg={handleCtgImg} key={item.id}/>)}
             </div>
-            <Navigation pageNum={pageNum} 
+            {transactionList.length && <Navigation pageNum={pageNum} 
                 handleDecrement={handleDecrement} 
                 handleIncrement={handleIncrement}
-            />
+            />}
         </div>
     </div> );
 }
