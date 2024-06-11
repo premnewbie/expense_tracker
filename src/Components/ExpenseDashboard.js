@@ -17,41 +17,21 @@ const ExpenseDashboard = () => {
         if(firstRender){
             setTransactionList(JSON.parse(localStorage.getItem('transactionList')));
             setWallet(JSON.parse(localStorage.getItem('wallet')))
-            setTransactionTotal(transactionList.reduce((total,transaction) => total+transaction.price,0));
-            setEntertainmentTotal(transactionList.filter((transaction) => 
-            (transaction.category==='Entertainment'))
-            .reduce((total,transaction) => total+transaction.price,0))
-            setFoodTotal(transactionList.filter((transaction) => 
-            (transaction.category==='Food'))
-            .reduce((total,transaction) => total+transaction.price,0))
-            setTravelTotal(transactionList.filter((transaction) => 
-            (transaction.category==='Travel'))
-            .reduce((total,transaction) => total+transaction.price,0))
-
             setFirstRender(false);
         }   
+        setTransactionTotal(transactionList.reduce((total,transaction) => total+transaction.price,0));
+        setEntertainmentTotal(transactionList.filter((transaction) => 
+        (transaction.category==='Entertainment'))
+        .reduce((total,transaction) => total+transaction.price,0))
+        setFoodTotal(transactionList.filter((transaction) => 
+        (transaction.category==='Food'))
+        .reduce((total,transaction) => total+transaction.price,0))
+        setTravelTotal(transactionList.filter((transaction) => 
+        (transaction.category==='Travel'))
+        .reduce((total,transaction) => total+transaction.price,0))
     },[change])
 
-    useEffect(()=>{
-        setTransactionList([{"id":1,"price":25,"transaction":"Samosa","category":"Food","date":"July 04, 2024"},
-            {"id":2,"price":100,"transaction":"Movie","category":"Entertainment","date":"July 04, 2024"},
-            {"id":3,"price":100,"transaction":"Auto","category":"Travel","date":"July 04, 2024"},
-            {"id":4,"price":75,"transaction":"Rice","category":"Food","date":"July 04, 2024"}])
-
-            setTransactionTotal(transactionList.reduce((total,transaction) => total+transaction.price,0));
-            setEntertainmentTotal(transactionList.filter((transaction) => 
-            (transaction.category==='Entertainment'))
-            .reduce((total,transaction) => total+transaction.price,0))
-            setFoodTotal(transactionList.filter((transaction) => 
-            (transaction.category==='Food'))
-            .reduce((total,transaction) => total+transaction.price,0))
-            setTravelTotal(transactionList.filter((transaction) => 
-            (transaction.category==='Travel'))
-            .reduce((total,transaction) => total+transaction.price,0))
-    },[])
-
-
-
+    
     const entertainmentPercent = entertainmentTotal/transactionTotal;
     const foodPercent = foodTotal/transactionTotal;
     const travelPercent = travelTotal/transactionTotal;
