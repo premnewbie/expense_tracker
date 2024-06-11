@@ -5,7 +5,6 @@ export const Context = createContext();
 
 const ExpenseDashboard = () => {
     const [change,setChange] = useState(false);
-    const [firstRender,setFirstRender] = useState(true);
     const [wallet,setWallet] = useState(JSON.parse(localStorage.getItem('wallet')));
     const[transactionList,setTransactionList] = useState(JSON.parse(localStorage.getItem('transactionList')));
     const [transactionTotal,setTransactionTotal] = useState()
@@ -13,12 +12,10 @@ const ExpenseDashboard = () => {
     const [foodTotal,setFoodTotal] = useState();
     const [travelTotal,setTravelTotal] =  useState();
 
-    useEffect(()=> {
-        if(firstRender){
-            setTransactionList(JSON.parse(localStorage.getItem('transactionList')));
-            setWallet(JSON.parse(localStorage.getItem('wallet')))
-            setFirstRender(false);
-        }   
+
+    useEffect(()=> {        
+        setTransactionList(JSON.parse(localStorage.getItem('transactionList')));
+        setWallet(JSON.parse(localStorage.getItem('wallet')))
         setTransactionTotal(transactionList.reduce((total,transaction) => total+transaction.price,0));
         setEntertainmentTotal(transactionList.filter((transaction) => 
         (transaction.category==='Entertainment'))
@@ -29,8 +26,9 @@ const ExpenseDashboard = () => {
         setTravelTotal(transactionList.filter((transaction) => 
         (transaction.category==='Travel'))
         .reduce((total,transaction) => total+transaction.price,0))
-    },[change])
 
+    },[change])
+   
     
     const entertainmentPercent = entertainmentTotal/transactionTotal;
     const foodPercent = foodTotal/transactionTotal;
