@@ -16,17 +16,18 @@ const ExpenseDashboard = () => {
     useEffect(()=> {        
         setTransactionList(JSON.parse(localStorage.getItem('transactionList')));
         setWallet(JSON.parse(localStorage.getItem('wallet')))
-        setTransactionTotal(transactionList.reduce((total,transaction) => total+transaction.price,0));
-        setEntertainmentTotal(transactionList.filter((transaction) => 
-        (transaction.category==='Entertainment'))
-        .reduce((total,transaction) => total+transaction.price,0))
-        setFoodTotal(transactionList.filter((transaction) => 
-        (transaction.category==='Food'))
-        .reduce((total,transaction) => total+transaction.price,0))
-        setTravelTotal(transactionList.filter((transaction) => 
-        (transaction.category==='Travel'))
-        .reduce((total,transaction) => total+transaction.price,0))
-
+        if(transactionList){
+            setTransactionTotal(transactionList.reduce((total,transaction) => total+transaction.price,0));
+            setEntertainmentTotal(transactionList.filter((transaction) => 
+            (transaction.category==='Entertainment'))
+            .reduce((total,transaction) => total+transaction.price,0))
+            setFoodTotal(transactionList.filter((transaction) => 
+            (transaction.category==='Food'))
+            .reduce((total,transaction) => total+transaction.price,0))
+            setTravelTotal(transactionList.filter((transaction) => 
+            (transaction.category==='Travel'))
+            .reduce((total,transaction) => total+transaction.price,0))
+        }
     },[change])
    
     
