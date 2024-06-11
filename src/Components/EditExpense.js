@@ -46,13 +46,17 @@ export default function EditExpense({open,handleClose,item}) {
     } else if(!date){
         enqueueSnackbar('Please select a date',{variant: 'warning',autoHideDuration:2000});
     } else {
+        wallet += prevPrice - price;
+        if(wallet<0){
+          enqueueSnackbar('Please enter the correct amount',{variant:'warning',autoHideDuration:2000});
+          return;
+        }  
         handleEditTransaction();
     }
 }
 
   const handleEditTransaction = () => {
     handleClose();
-    wallet += prevPrice - price;
     item.date = date;
     item.transaction = transaction;
     item.category = category;

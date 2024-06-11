@@ -56,6 +56,8 @@ export default function AddExpense({open,handleClose}) {
             enqueueSnackbar('Please select a category',{variant: 'warning',autoHideDuration:2000});
         } else if(!date){
             enqueueSnackbar('Please select a date',{variant: 'warning',autoHideDuration:2000});
+        } else if(price>wallet){
+            enqueueSnackbar('Please enter the correct amount',{variant:'warning',autoHideDuration:2000})
         } else {
             handleAddTransaction();
         }
