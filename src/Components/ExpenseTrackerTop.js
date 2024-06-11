@@ -4,6 +4,8 @@ import { useContext } from 'react';
 import { Context } from "./ExpenseDashboard";
 import WalletBalnce from './WalletBalance';
 import Expenses from './Expenses';
+import Labels from './Labels';
+
 
 const ExpenseTrackerTop = () => {
     const {data} = useContext(Context);
@@ -16,11 +18,7 @@ const ExpenseTrackerTop = () => {
             <div className='piechart-and-labels'>
                 <PieChartWithCustomizedLabel data={data}/>
                 <div className='labels'>
-                    {data.map(item => (<>
-                    <span key={item.label} className='color-indicator' 
-                    style={{backgroundColor: `${item.color}`,width:20,height:10}}></span>
-                    <p>{item.label}</p>
-                    </>))}
+                    {data.map(item => <Labels item={item} key={item.label}/> )}
                 </div>
             </div>
         </div>
