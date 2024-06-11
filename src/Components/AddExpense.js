@@ -50,7 +50,6 @@ export default function AddExpense({open,handleClose}) {
     const handleCheck = () => {
         if(!transaction){
             enqueueSnackbar('Please Enter a Title for the transaction',{variant: 'warning',autoHideDuration:2000});
-            // alert("Transaction is not there");
         } else if(!price){
             enqueueSnackbar('Please Enter the price',{variant: 'warning',autoHideDuration:2000});
         } else if(!category){

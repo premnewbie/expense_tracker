@@ -13,6 +13,13 @@ const ExpenseDashboard = () => {
         setWallet(JSON.parse(localStorage.getItem('wallet')))
     },[change])
 
+    useEffect(()=>{
+        setTransactionList([{"id":1,"price":25,"transaction":"Samosa","category":"Food","date":"July 04, 2024"},
+            {"id":2,"price":100,"transaction":"Movie","category":"Entertainment","date":"July 04, 2024"},
+            {"id":3,"price":100,"transaction":"Auto","category":"Travel","date":"July 04, 2024"},
+            {"id":4,"price":75,"transaction":"Rice","category":"Food","date":"July 04, 2024"}])
+    },[])
+
     const transactionTotal = transactionList.reduce((total,transaction) => total+transaction.price,0)
 
     const entertainmentTotal = transactionList.filter((transaction) => 
